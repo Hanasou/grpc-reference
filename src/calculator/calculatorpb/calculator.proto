@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package calculator;
+
+option go_package = "calculator/calculatorpb";
+
+message TwoNumbers {
+    int32 x = 1;
+    int32 y = 2;
+}
+
+message SumRequest {
+    TwoNumbers nums = 1;
+}
+
+message SumResponse {
+    int32 result = 1;
+}
+
+message PrimeDecompRequest {
+    int32 num = 1;
+}
+
+message PrimeDecompResponse {
+    int32 result = 1;
+}
+
+message AverageRequest {
+    int64 num = 1;
+}
+
+message AverageResponse {
+    int64 result = 1;
+}
+
+message SquareRootRequest {
+    int32 number = 1;
+}
+
+message SquareRootResponse {
+    double number_root = 1;
+}
+
+service CalculatorService {
+    rpc Sum(SumRequest) returns (SumResponse) {};
+
+    rpc PrimeDecomp(PrimeDecompRequest) returns (stream PrimeDecompResponse) {};
+
+    rpc Average(stream AverageRequest) returns (AverageResponse) {};
+
+    rpc SquareRoot(SquareRootRequest) returns (SquareRootResponse) {};
+}
